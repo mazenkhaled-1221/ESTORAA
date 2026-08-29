@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#0b0b0b"
+    >
+
+    <title>ESTORA | Admin Dashboard</title>
+
+    <!-- Google Fonts -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@400;500;600&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+    <!-- Admin CSS -->
+
+    <link
+        rel="stylesheet"
+        href="admin-style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ========================================
+         ADMIN PAGE
+    ========================================= -->
+
+    <div class="admin-page">
+
+
+        <!-- ========================================
+             SIDEBAR
+        ========================================= -->
+
+        <aside class="sidebar" id="sidebar">
+
+
+            <div class="sidebar-top">
+
+
+                <!-- LOGO -->
+
+                <a
+                    href="index.html"
+                    class="admin-logo"
+                >
+
+                    EST<span>O</span>RA
+
+                </a>
+
+
+                <div class="admin-label">
+
+                    ADMIN PANEL
+
+                </div>
+
+
+                <!-- NAVIGATION -->
+
+                <nav class="admin-nav">
+
+
+                    <a
+                        href="#dashboard"
+                        class="nav-item active"
+                    >
+
+                        <i class="fa-solid fa-chart-line"></i>
+
+                        <span>
+                            Dashboard
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="#properties"
+                        class="nav-item"
+                    >
+
+                        <i class="fa-solid fa-building"></i>
+
+                        <span>
+                            Properties
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="#subscribers"
+                        class="nav-item"
+                    >
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                        <span>
+                            Subscribers
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="index.html"
+                        class="nav-item"
+                    >
+
+                        <i class="fa-solid fa-globe"></i>
+
+                        <span>
+                            View Website
+                        </span>
+
+                    </a>
+
+
+                </nav>
+
+            </div>
+
+
+            <!-- SIDEBAR BOTTOM -->
+
+            <div class="sidebar-bottom">
+
+
+                <button
+                    type="button"
+                    class="logout-btn"
+                    onclick="logout()"
+                >
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    <span>
+                        Logout
+                    </span>
+
+                </button>
+
+
+            </div>
+
+
+        </aside>
+
+
+        <!-- ========================================
+             MAIN CONTENT
+        ========================================= -->
+
+        <main class="main-content">
+
+
+            <!-- TOP BAR -->
+
+            <header class="topbar">
+
+
+                <button
+                    type="button"
+                    class="menu-btn"
+                    id="menuBtn"
+                    aria-label="Open menu"
+                >
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+
+                <div class="topbar-title">
+
+                    <span>
+                        ESTORA
+                    </span>
+
+                    <strong>
+                        Administration
+                    </strong>
+
+                </div>
+
+
+                <div class="admin-user">
+
+
+                    <div class="admin-user-icon">
+
+                        <i class="fa-solid fa-user"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Administrator
+                        </strong>
+
+                        <small>
+                            ESTORA Admin
+                        </small>
+
+                    </div>
+
+
+                </div>
+
+
+            </header>
+
+
+            <!-- ========================================
+                 DASHBOARD
+            ========================================= -->
+
+            <section
+                class="dashboard-section"
+                id="dashboard"
+            >
+
+
+                <div class="page-heading">
+
+
+                    <div>
+
+                        <span>
+                            CONTROL CENTER
+                        </span>
+
+                        <h1>
+                            Dashboard
+                        </h1>
+
+                        <p>
+                            Manage your ESTORA properties
+                            and subscribers.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="primary-btn"
+                        id="openAddProperty"
+                    >
+
+                        <i class="fa-solid fa-plus"></i>
+
+                        ADD NEW UNIT
+
+                    </button>
+
+
+                </div>
+
+
+                <!-- ========================================
+                     STATISTICS
+                ========================================= -->
+
+                <div class="stats-grid">
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon">
+
+                            <i class="fa-solid fa-building"></i>
+
+                        </div>
+
+                        <div>
+
+                            <span>
+                                TOTAL UNITS
+                            </span>
+
+                            <strong id="totalProperties">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon available-icon">
+
+                            <i class="fa-solid fa-house-circle-check"></i>
+
+                        </div>
+
+                        <div>
+
+                            <span>
+                                AVAILABLE
+                            </span>
+
+                            <strong id="availableProperties">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon sold-icon">
+
+                            <i class="fa-solid fa-circle-check"></i>
+
+                        </div>
+
+                        <div>
+
+                            <span>
+                                SOLD OUT
+                            </span>
+
+                            <strong id="soldProperties">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon email-icon">
+
+                            <i class="fa-solid fa-envelope"></i>
+
+                        </div>
+
+                        <div>
+
+                            <span>
+                                SUBSCRIBERS
+                            </span>
+
+                            <strong id="totalSubscribers">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+            <!-- ========================================
+                 PROPERTY MANAGEMENT
+            ========================================= -->
+
+            <section
+                class="admin-properties"
+                id="properties"
+            >
+
+
+                <div class="section-heading">
+
+
+                    <div>
+
+                        <span>
+                            PROPERTY MANAGEMENT
+                        </span>
+
+                        <h2>
+                            Manage Units
+                        </h2>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="primary-btn"
+                        id="openAddProperty2"
+                    >
+
+                        <i class="fa-solid fa-plus"></i>
+
+                        NEW UNIT
+
+                    </button>
+
+
+                </div>
+
+
+                <!-- ========================================
+                     ADD / EDIT FORM
+                ========================================= -->
+
+                <div
+                    class="property-form-wrapper"
+                    id="propertyFormWrapper"
+                    hidden
+                >
+
+
+                    <div class="form-header">
+
+
+                        <div>
+
+                            <span>
+                                PROPERTY DETAILS
+                            </span>
+
+                            <h3 id="formTitle">
+                                Add New Unit
+                            </h3>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="close-form"
+                            id="cancelPropertyTop"
+                        >
+
+                            <i class="fa-solid fa-xmark"></i>
+
+                        </button>
+
+
+                    </div>
+
+
+                    <form
+                        id="propertyForm"
+                        autocomplete="off"
+                    >
+
+
+                        <input
+                            type="hidden"
+                            id="propertyId"
+                        >
+
+
+                        <div class="form-grid">
+
+
+                            <!-- TITLE -->
+
+                            <div class="form-group">
+
+                                <label for="propertyTitle">
+                                    Property Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="propertyTitle"
+                                    placeholder="Luxury Villa"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- TYPE -->
+
+                            <div class="form-group">
+
+                                <label for="propertyType">
+                                    Property Type
+                                </label>
+
+                                <select id="propertyType">
+
+                                    <option value="Villa">
+                                        Villa
+                                    </option>
+
+                                    <option value="Apartment">
+                                        Apartment
+                                    </option>
+
+                                    <option value="Chalet">
+                                        Chalet
+                                    </option>
+
+                                    <option value="Townhouse">
+                                        Townhouse
+                                    </option>
+
+                                    <option value="Penthouse">
+                                        Penthouse
+                                    </option>
+
+                                    <option value="Commercial">
+                                        Commercial
+                                    </option>
+
+                                    <option value="Twin House">
+                                        Twin House
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <!-- LOCATION -->
+
+                            <div class="form-group">
+
+                                <label for="propertyLocation">
+                                    Location
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="propertyLocation"
+                                    placeholder="New Cairo, Egypt"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- PRICE -->
+
+                            <div class="form-group">
+
+                                <label for="propertyPrice">
+                                    Price — EGP
+                                </label>
+
+                                <div class="input-with-suffix">
+
+                                    <input
+                                        type="number"
+                                        id="propertyPrice"
+                                        placeholder="5500000"
+                                        min="0"
+                                        required
+                                    >
+
+                                    <span>
+                                        EGP
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- BEDROOMS -->
+
+                            <div class="form-group">
+
+                                <label for="propertyBedrooms">
+                                    Bedrooms
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="propertyBedrooms"
+                                    min="0"
+                                    placeholder="3"
+                                >
+
+                            </div>
+
+
+                            <!-- BATHROOMS -->
+
+                            <div class="form-group">
+
+                                <label for="propertyBathrooms">
+                                    Bathrooms
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="propertyBathrooms"
+                                    min="0"
+                                    placeholder="3"
+                                >
+
+                            </div>
+
+
+                            <!-- AREA -->
+
+                            <div class="form-group">
+
+                                <label for="propertyArea">
+                                    Area — m²
+                                </label>
+
+                                <div class="input-with-suffix">
+
+                                    <input
+                                        type="number"
+                                        id="propertyArea"
+                                        min="0"
+                                        placeholder="250"
+                                    >
+
+                                    <span>
+                                        m²
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- FLOOR -->
+
+                            <div class="form-group">
+
+                                <label for="propertyFloor">
+                                    Floor
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="propertyFloor"
+                                    placeholder="Ground Floor"
+                                >
+
+                            </div>
+
+
+                            <!-- PURPOSE -->
+
+                            <div class="form-group">
+
+                                <label for="propertyPurpose">
+                                    Purpose
+                                </label>
+
+                                <select id="propertyPurpose">
+
+                                    <option value="Sale">
+                                        Sale
+                                    </option>
+
+                                    <option value="Rent">
+                                        Rent
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <!-- BADGE -->
+
+                            <div class="form-group">
+
+                                <label for="propertyBadge">
+                                    Badge
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="propertyBadge"
+                                    placeholder="FEATURED"
+                                >
+
+                            </div>
+
+
+                            <!-- DESCRIPTION -->
+
+                            <div class="form-group full">
+
+                                <label for="propertyDescription">
+                                    Description
+                                </label>
+
+                                <textarea
+                                    id="propertyDescription"
+                                    rows="6"
+                                    placeholder="Write a premium description for this property..."
+                                ></textarea>
+
+                            </div>
+
+
+                            <!-- IMAGES -->
+
+                            <div class="form-group full">
+
+                                <label for="propertyImages">
+                                    Property Images
+                                </label>
+
+
+                                <div class="upload-box">
+
+                                    <i class="fa-solid fa-cloud-arrow-up"></i>
+
+                                    <strong>
+                                        Upload Property Images
+                                    </strong>
+
+                                    <span>
+                                        Select multiple images
+                                        for your property
+                                    </span>
+
+                                    <input
+                                        type="file"
+                                        id="propertyImages"
+                                        accept="image/*"
+                                        multiple
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <!-- IMAGE PREVIEW -->
+
+                        <div
+                            class="image-preview"
+                            id="imagePreview"
+                        ></div>
+
+
+                        <!-- FORM ACTIONS -->
+
+                        <div class="form-actions">
+
+
+                            <button
+                                type="button"
+                                class="cancel-btn"
+                                id="cancelProperty"
+                            >
+                                CANCEL
+                            </button>
+
+
+                            <button
+                                type="submit"
+                                class="save-btn"
+                            >
+
+                                <i class="fa-solid fa-check"></i>
+
+                                SAVE UNIT
+
+                            </button>
+
+
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+
+                <!-- ========================================
+                     PROPERTY LIST
+                ========================================= -->
+
+                <div
+                    class="admin-properties-grid"
+                    id="adminPropertiesGrid"
+                ></div>
+
+
+            </section>
+
+
+            <!-- ========================================
+                 SUBSCRIBERS
+            ========================================= -->
+
+            <section
+                class="subscribers-section"
+                id="subscribers"
+            >
+
+
+                <div class="section-heading">
+
+
+                    <div>
+
+                        <span>
+                            EMAIL AUDIENCE
+                        </span>
+
+                        <h2>
+                            Subscribers
+                        </h2>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="subscribers-card">
+
+
+                    <div class="subscriber-card-top">
+
+                        <div class="subscriber-icon">
+
+                            <i class="fa-solid fa-envelope"></i>
+
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                ESTORA Newsletter
+                            </strong>
+
+                            <p>
+                                People who subscribed
+                                for new property updates.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="subscriber-list"
+                        id="subscriberList"
+                    >
+
+                        <div class="empty-subscribers">
+
+                            <i class="fa-regular fa-envelope"></i>
+
+                            <p>
+                                No subscribers yet.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+            <!-- FOOTER -->
+
+            <footer class="admin-footer">
+
+                <span>
+                    © 2026 ESTORA
+                </span>
+
+                <span>
+                    Admin Dashboard
+                </span>
+
+            </footer>
+
+
+        </main>
+
+
+    </div>
+
+
+    <!-- MOBILE OVERLAY -->
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+    ></div>
+
+
+    <!-- ========================================
+         JAVASCRIPT
+    ========================================= -->
+
+    <script src="admin.js"></script>
+
+
+    <!-- DASHBOARD HELPERS -->
+
+    <script>
+
+        /*
+         * Admin authentication
+         */
+
+        if (
+            sessionStorage.getItem(
+                "estoraAdminLoggedIn"
+            ) !== "true"
+        ) {
+
+            window.location.replace(
+                "admin-login.html"
+            );
+
+        }
+
+
+        /*
+         * Mobile sidebar
+         */
+
+        const menuBtn =
+            document.getElementById(
+                "menuBtn"
+            );
+
+        const sidebar =
+            document.getElementById(
+                "sidebar"
+            );
+
+        const sidebarOverlay =
+            document.getElementById(
+                "sidebarOverlay"
+            );
+
+
+        function closeSidebar() {
+
+            if (!sidebar) return;
+
+            sidebar.classList.remove(
+                "open"
+            );
+
+            sidebarOverlay.classList.remove(
+                "show"
+            );
+
+        }
+
+
+        if (menuBtn) {
+
+            menuBtn.addEventListener(
+                "click",
+                () => {
+
+                    sidebar.classList.toggle(
+                        "open"
+                    );
+
+                    sidebarOverlay.classList.toggle(
+                        "show"
+                    );
+
+                }
+            );
+
+        }
+
+
+        if (sidebarOverlay) {
+
+            sidebarOverlay.addEventListener(
+                "click",
+                closeSidebar
+            );
+
+        }
+
+
+        /*
+         * Navigation
+         */
+
+        document
+            .querySelectorAll(
+                ".nav-item"
+            )
+            .forEach(item => {
+
+                item.addEventListener(
+                    "click",
+                    () => {
+
+                        document
+                            .querySelectorAll(
+                                ".nav-item"
+                            )
+                            .forEach(
+                                nav =>
+                                    nav.classList.remove(
+                                        "active"
+                                    )
+                            );
+
+                        item.classList.add(
+                            "active"
+                        );
+
+                        closeSidebar();
+
+                    }
+                );
+
+            });
+
+
+        /*
+         * Second Add Unit button
+         */
+
+        const openAddProperty2 =
+            document.getElementById(
+                "openAddProperty2"
+            );
+
+
+        if (
+            openAddProperty2 &&
+            typeof openAddProperty !==
+                "undefined"
+        ) {
+
+            openAddProperty2.addEventListener(
+                "click",
+                () => {
+
+                    openAddProperty.click();
+
+                }
+            );
+
+        }
+
+
+        /*
+         * Close button
+         */
+
+        const cancelPropertyTop =
+            document.getElementById(
+                "cancelPropertyTop"
+            );
+
+
+        if (cancelPropertyTop) {
+
+            cancelPropertyTop.addEventListener(
+                "click",
+                () => {
+
+                    const form =
+                        document.getElementById(
+                            "propertyFormWrapper"
+                        );
+
+                    if (form) {
+
+                        form.hidden = true;
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        /*
+         * Statistics
+         */
+
+        function updateDashboardStats() {
+
+            let properties = [];
+
+            try {
+
+                properties =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "estoraAdminProperties"
+                        ) || "[]"
+                    );
+
+            } catch {
+
+                properties = [];
+
+            }
+
+
+            const total =
+                properties.length;
+
+
+            const sold =
+                properties.filter(
+                    property =>
+                        property.status ===
+                        "sold"
+                ).length;
+
+
+            const available =
+                total - sold;
+
+
+            let subscribers = [];
+
+            try {
+
+                subscribers =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "estoraSubscribers"
+                        ) || "[]"
+                    );
+
+            } catch {
+
+                subscribers = [];
+
+            }
+
+
+            const totalProperties =
+                document.getElementById(
+                    "totalProperties"
+                );
+
+            const availableProperties =
+                document.getElementById(
+                    "availableProperties"
+                );
+
+            const soldProperties =
+                document.getElementById(
+                    "soldProperties"
+                );
+
+            const totalSubscribers =
+                document.getElementById(
+                    "totalSubscribers"
+                );
+
+
+            if (totalProperties)
+                totalProperties.textContent =
+                    total;
+
+
+            if (availableProperties)
+                availableProperties.textContent =
+                    available;
+
+
+            if (soldProperties)
+                soldProperties.textContent =
+                    sold;
+
+
+            if (totalSubscribers)
+                totalSubscribers.textContent =
+                    subscribers.length;
+
+        }
+
+
+        /*
+         * Subscribers
+         */
+
+        function renderSubscribers() {
+
+            const list =
+                document.getElementById(
+                    "subscriberList"
+                );
+
+
+            if (!list) return;
+
+
+            let subscribers = [];
+
+            try {
+
+                subscribers =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "estoraSubscribers"
+                        ) || "[]"
+                    );
+
+            } catch {
+
+                subscribers = [];
+
+            }
+
+
+            if (!subscribers.length) {
+
+                list.innerHTML = `
+
+                    <div class="empty-subscribers">
+
+                        <i class="fa-regular fa-envelope"></i>
+
+                        <p>
+                            No subscribers yet.
+                        </p>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            list.innerHTML =
+                subscribers
+                    .map(
+                        (email, index) => `
+
+                            <div class="subscriber-row">
+
+                                <div class="subscriber-number">
+
+                                    ${index + 1}
+
+                                </div>
+
+                                <div class="subscriber-email">
+
+                                    <i class="fa-regular fa-envelope"></i>
+
+                                    ${email}
+
+                                </div>
+
+                                <span class="subscriber-status">
+
+                                    SUBSCRIBED
+
+                                </span>
+
+                            </div>
+
+                        `
+                    )
+                    .join("");
+
+        }
+
+
+        /*
+         * Update after page loads
+         */
+
+        updateDashboardStats();
+
+        renderSubscribers();
+
+
+        /*
+         * Keep stats updated
+         */
+
+        setInterval(
+            () => {
+
+                updateDashboardStats();
+
+                renderSubscribers();
+
+            },
+            1000
+        );
+
+
+        /*
+         * Logout
+         */
+
+        function logout() {
+
+            sessionStorage.removeItem(
+                "estoraAdminLoggedIn"
+            );
+
+            window.location.replace(
+                "admin-login.html"
+            );
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

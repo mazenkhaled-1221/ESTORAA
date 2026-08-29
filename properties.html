@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ESTORA — Explore our luxury real estate properties.">
+    <meta name="theme-color" content="#111111">
+    <title>Properties — ESTORA</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .properties-page {
+            min-height: 100vh;
+            padding: 150px 0 100px;
+            background: #0b0b0b;
+        }
+
+        .properties-page-container {
+            width: min(100% - 48px, 1380px);
+            margin: auto;
+        }
+
+        .properties-page-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 40px;
+            margin-bottom: 55px;
+        }
+
+        .properties-page-heading h1 {
+            margin-top: 15px;
+            font-family: "Playfair Display", serif;
+            font-size: clamp(3rem, 6vw, 6rem);
+            font-weight: 500;
+            line-height: .95;
+        }
+
+        .properties-page-heading h1 em {
+            color: #e2c994;
+            font-style: italic;
+        }
+
+        .properties-page-heading p {
+            max-width: 420px;
+            color: #a4a4a0;
+            line-height: 1.8;
+        }
+
+        .properties-toolbar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 35px;
+            padding: 18px;
+            background: #151515;
+            border: 1px solid rgba(255,255,255,.12);
+        }
+
+        .properties-toolbar select {
+            min-height: 52px;
+            padding: 0 15px;
+            color: #fff;
+            background: #0e0e0e;
+            border: 1px solid rgba(255,255,255,.1);
+            outline: none;
+        }
+
+        .properties-toolbar button {
+            min-height: 52px;
+            color: #111;
+            background: #c8a96b;
+            font-weight: 700;
+        }
+
+        .properties-result {
+            margin-bottom: 20px;
+            color: #73736f;
+            font-size: .75rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+
+        .properties-page-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .properties-page-card {
+            overflow: hidden;
+            background: #151515;
+            border: 1px solid rgba(255,255,255,.08);
+            transition: .35s ease;
+        }
+
+        .properties-page-card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(200,169,107,.35);
+        }
+
+        .properties-page-image {
+            position: relative;
+            aspect-ratio: 4 / 3;
+            overflow: hidden;
+        }
+
+        .properties-page-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: .7s ease;
+        }
+
+        .properties-page-card:hover img {
+            transform: scale(1.06);
+        }
+
+        .properties-page-badge {
+            position: absolute;
+            top: 18px;
+            left: 18px;
+            padding: 7px 11px;
+            color: #111;
+            background: #c8a96b;
+            font-size: .58rem;
+            font-weight: 800;
+            letter-spacing: .12em;
+        }
+
+        .properties-page-info {
+            padding: 25px;
+        }
+
+        .properties-page-type {
+            color: #c8a96b;
+            font-size: .6rem;
+            font-weight: 700;
+            letter-spacing: .14em;
+        }
+
+        .properties-page-info h2 {
+            margin: 10px 0 8px;
+            font-family: "Playfair Display", serif;
+            font-size: 1.55rem;
+            font-weight: 500;
+        }
+
+        .properties-page-location {
+            color: #a4a4a0;
+            font-size: .76rem;
+        }
+
+        .properties-page-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 20px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255,255,255,.1);
+            color: #a4a4a0;
+            font-size: .7rem;
+        }
+
+        .properties-page-meta i {
+            color: #c8a96b;
+            margin-right: 5px;
+        }
+
+        .properties-page-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .properties-page-price {
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .properties-page-view {
+            padding: 10px 13px;
+            color: #111;
+            background: #fff;
+            font-size: .62rem;
+            font-weight: 800;
+            letter-spacing: .08em;
+        }
+
+        .properties-page-empty {
+            grid-column: 1 / -1;
+            padding: 80px 20px;
+            text-align: center;
+            color: #888;
+        }
+
+        @media (max-width: 900px) {
+            .properties-page-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .properties-toolbar {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .properties-page {
+                padding-top: 115px;
+            }
+
+            .properties-page-container {
+                width: min(100% - 28px, 1380px);
+            }
+
+            .properties-page-heading {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .properties-toolbar,
+            .properties-page-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="navbar" id="navbar">
+    <div class="nav-container">
+        <a href="index.html" class="logo">
+            <span class="logo-name">ESTORA</span>
+            <span class="logo-subtitle">REAL ESTATE</span>
+        </a>
+
+        <nav class="nav-menu">
+            <a href="index.html">Home</a>
+            <a href="properties.html" class="active">Properties</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#contact">Contact</a>
+        </nav>
+
+        <div class="nav-actions">
+            <a href="index.html#contact" class="nav-cta">
+                Let's Talk
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+        </div>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Open navigation menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="properties.html">Properties</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#contact">Contact</a>
+        </nav>
+        <a href="index.html#contact" class="mobile-cta">
+            Let's Talk
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+    </div>
+</header>
+
+<main class="properties-page">
+    <div class="properties-page-container">
+
+        <div class="properties-page-heading">
+            <div>
+                <span class="section-eyebrow">ESTORA COLLECTION</span>
+                <h1>Explore our <em>properties.</em></h1>
+            </div>
+            <p>
+                Discover carefully selected villas, apartments and homes
+                in some of Egypt's most desirable locations.
+            </p>
+        </div>
+
+        <div class="properties-toolbar">
+            <select id="filterPurpose">
+                <option value="">Buy or Rent</option>
+                <option value="Sale">For Sale</option>
+                <option value="Rent">For Rent</option>
+            </select>
+
+            <select id="filterLocation">
+                <option value="">All Locations</option>
+                <option value="New Cairo">New Cairo</option>
+                <option value="Sheikh Zayed">Sheikh Zayed</option>
+                <option value="North Coast">North Coast</option>
+                <option value="Maadi">Maadi</option>
+            </select>
+
+            <select id="filterType">
+                <option value="">All Types</option>
+                <option value="Villa">Villa</option>
+                <option value="Apartment">Apartment</option>
+                <option value="House">House</option>
+                <option value="Chalet">Chalet</option>
+                <option value="Office">Office</option>
+            </select>
+
+            <button id="clearFilters" type="button">
+                RESET FILTERS
+            </button>
+        </div>
+
+        <div class="properties-result" id="propertiesResult"></div>
+
+        <div class="properties-page-grid" id="allProperties"></div>
+
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-main">
+            <div class="footer-brand">
+                <a href="index.html" class="logo footer-logo">
+                    <span class="logo-name">ESTORA</span>
+                    <span class="logo-subtitle">REAL ESTATE</span>
+                </a>
+                <p>Exceptional spaces. Extraordinary living.</p>
+            </div>
+
+            <div class="footer-column">
+                <h3>Explore</h3>
+                <a href="index.html">Home</a>
+                <a href="properties.html">Properties</a>
+                <a href="index.html#about">About</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+
+            <div class="footer-column">
+                <h3>Properties</h3>
+                <a href="properties.html">For Sale</a>
+                <a href="properties.html">For Rent</a>
+                <a href="properties.html">Villas</a>
+                <a href="properties.html">Apartments</a>
+            </div>
+
+            <div class="footer-column footer-contact">
+                <h3>Get in touch</h3>
+                <a href="mailto:hello@estora.com">hello@estora.com</a>
+                <a href="tel:+201000000000">+20 100 000 0000</a>
+                <span>Cairo, Egypt</span>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 ESTORA. All Rights Reserved.</p>
+            <div>
+                <a href="admin-login.html">Admin</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms & Conditions</a>
+                
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="properties-page.js"></script>
+
+</body>
+</html>

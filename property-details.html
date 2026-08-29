@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ESTORA — Property details.">
+    <meta name="theme-color" content="#111111">
+    <title>Property Details — ESTORA</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .details-page {
+            min-height: 100vh;
+            padding: 145px 0 100px;
+            background: #0b0b0b;
+        }
+
+        .details-container {
+            width: min(100% - 48px, 1380px);
+            margin: auto;
+        }
+
+        .details-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            color: #a4a4a0;
+            font-size: .75rem;
+        }
+
+        .details-back:hover {
+            color: #fff;
+        }
+
+        .details-gallery {
+            display: grid;
+            grid-template-columns: 1.6fr .7fr;
+            gap: 12px;
+        }
+
+        .details-main-image,
+        .details-side-image {
+            overflow: hidden;
+        }
+
+        .details-main-image {
+            aspect-ratio: 16 / 10;
+        }
+
+        .details-side {
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .details-side-image {
+            min-height: 0;
+        }
+
+        .details-gallery img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .details-content {
+            display: grid;
+            grid-template-columns: 1.5fr .7fr;
+            gap: 70px;
+            margin-top: 60px;
+        }
+
+        .details-type {
+            color: #c8a96b;
+            font-size: .65rem;
+            font-weight: 800;
+            letter-spacing: .18em;
+        }
+
+        .details-title {
+            margin-top: 12px;
+            font-family: "Playfair Display", serif;
+            font-size: clamp(2.7rem, 6vw, 5.5rem);
+            font-weight: 500;
+            line-height: .95;
+        }
+
+        .details-location {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+            color: #a4a4a0;
+        }
+
+        .details-location i {
+            color: #c8a96b;
+        }
+
+        .details-description {
+            max-width: 700px;
+            margin-top: 35px;
+            color: #a4a4a0;
+            line-height: 1.9;
+        }
+
+        .details-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 40px;
+        }
+
+        .details-feature {
+            padding: 24px;
+            background: #151515;
+            border: 1px solid rgba(255,255,255,.08);
+        }
+
+        .details-feature i {
+            color: #c8a96b;
+            font-size: 1.1rem;
+        }
+
+        .details-feature strong {
+            display: block;
+            margin-top: 12px;
+            font-size: 1.1rem;
+        }
+
+        .details-feature span {
+            display: block;
+            margin-top: 4px;
+            color: #73736f;
+            font-size: .7rem;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+        }
+
+        .details-card {
+            align-self: start;
+            padding: 30px;
+            background: #151515;
+            border: 1px solid rgba(255,255,255,.1);
+        }
+
+        .details-price-label {
+            color: #73736f;
+            font-size: .65rem;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+        }
+
+        .details-price {
+            margin-top: 8px;
+            font-family: "Playfair Display", serif;
+            font-size: 2.2rem;
+        }
+
+        .details-card button,
+        .details-card a {
+            width: 100%;
+            min-height: 55px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 18px;
+            font-weight: 700;
+        }
+
+        .details-contact {
+            color: #111;
+            background: #c8a96b;
+        }
+
+        .details-back-properties {
+            color: #fff;
+            border: 1px solid rgba(255,255,255,.15);
+        }
+
+        .details-status {
+            margin-top: 18px;
+            color: #8fcf9b;
+            font-size: .7rem;
+            text-align: center;
+        }
+
+        .details-error {
+            padding: 120px 20px;
+            text-align: center;
+        }
+
+        .details-error h1 {
+            font-family: "Playfair Display", serif;
+        }
+
+        @media (max-width: 850px) {
+            .details-gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .details-side {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 220px;
+            }
+
+            .details-content {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .details-container {
+                width: min(100% - 28px, 1380px);
+            }
+
+            .details-page {
+                padding-top: 110px;
+            }
+
+            .details-features {
+                grid-template-columns: 1fr;
+            }
+
+            .details-side {
+                grid-template-rows: 160px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="navbar" id="navbar">
+    <div class="nav-container">
+        <a href="index.html" class="logo">
+            <span class="logo-name">ESTORA</span>
+            <span class="logo-subtitle">REAL ESTATE</span>
+        </a>
+
+        <nav class="nav-menu">
+            <a href="index.html">Home</a>
+            <a href="properties.html" class="active">Properties</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#contact">Contact</a>
+        </nav>
+
+        <div class="nav-actions">
+            <a href="index.html#contact" class="nav-cta">
+                Let's Talk
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+        </div>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Open navigation menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="properties.html">Properties</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#contact">Contact</a>
+        </nav>
+        <a href="index.html#contact" class="mobile-cta">
+            Let's Talk
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+    </div>
+</header>
+
+<main class="details-page">
+    <div class="details-container" id="propertyDetails"></div>
+</main>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-main">
+            <div class="footer-brand">
+                <a href="index.html" class="logo footer-logo">
+                    <span class="logo-name">ESTORA</span>
+                    <span class="logo-subtitle">REAL ESTATE</span>
+                </a>
+                <p>Exceptional spaces. Extraordinary living.</p>
+            </div>
+
+            <div class="footer-column">
+                <h3>Explore</h3>
+                <a href="index.html">Home</a>
+                <a href="properties.html">Properties</a>
+                <a href="index.html#about">About</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+
+            <div class="footer-column">
+                <h3>Properties</h3>
+                <a href="properties.html">For Sale</a>
+                <a href="properties.html">For Rent</a>
+                <a href="properties.html">Villas</a>
+                <a href="properties.html">Apartments</a>
+            </div>
+
+            <div class="footer-column footer-contact">
+                <h3>Get in touch</h3>
+                <a href="mailto:hello@estora.com">hello@estora.com</a>
+                <a href="tel:+201000000000">+20 100 000 0000</a>
+                <span>Cairo, Egypt</span>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 ESTORA. All Rights Reserved.</p>
+            <div>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms & Conditions</a>
+                <a href="admin-login.html">Admin</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="property-details.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Login | ESTORA</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        :root {
+
+            --gold: #c9a86a;
+
+            --gold-light: #e4c991;
+
+            --black: #070707;
+
+            --card: #111111;
+
+            --border: rgba(255,255,255,.1);
+
+            --muted: #777;
+
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 25px;
+
+            background:
+
+                radial-gradient(
+                    circle at 20% 20%,
+                    rgba(201,168,106,.09),
+                    transparent 30%
+                ),
+
+                radial-gradient(
+                    circle at 80% 80%,
+                    rgba(201,168,106,.06),
+                    transparent 30%
+                ),
+
+                var(--black);
+
+            color: white;
+
+            font-family: "DM Sans", sans-serif;
+
+        }
+
+
+        .login-wrapper {
+
+            width: 100%;
+
+            max-width: 440px;
+
+        }
+
+
+        .logo {
+
+            margin-bottom: 35px;
+
+            text-align: center;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 2.5rem;
+
+            letter-spacing: .15em;
+
+        }
+
+
+        .logo span {
+
+            color: var(--gold);
+
+        }
+
+
+        .login-card {
+
+            position: relative;
+
+            padding: 42px 35px;
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.035),
+                    rgba(255,255,255,.01)
+                );
+
+            border: 1px solid var(--border);
+
+            box-shadow:
+
+                0 30px 80px
+                rgba(0,0,0,.5);
+
+            overflow: hidden;
+
+        }
+
+
+        .login-card::before {
+
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+
+            height: 2px;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    var(--gold),
+                    transparent
+                );
+
+        }
+
+
+        .icon {
+
+            width: 58px;
+            height: 58px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin: 0 auto 25px;
+
+            color: var(--gold);
+
+            background: rgba(201,168,106,.08);
+
+            border: 1px solid
+                rgba(201,168,106,.2);
+
+            border-radius: 50%;
+
+            font-size: 1.1rem;
+
+        }
+
+
+        h1 {
+
+            margin-bottom: 8px;
+
+            text-align: center;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 2rem;
+
+            font-weight: 400;
+
+        }
+
+
+        .subtitle {
+
+            margin-bottom: 32px;
+
+            color: var(--muted);
+
+            text-align: center;
+
+            font-size: .68rem;
+
+        }
+
+
+        .form-group {
+
+            margin-bottom: 20px;
+
+        }
+
+
+        label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #aaa;
+
+            font-size: .62rem;
+
+            font-weight: 600;
+
+            letter-spacing: .05em;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .input-box {
+
+            position: relative;
+
+        }
+
+
+        .input-box > i {
+
+            position: absolute;
+
+            top: 50%;
+            left: 15px;
+
+            transform: translateY(-50%);
+
+            color: #555;
+
+            font-size: .75rem;
+
+        }
+
+
+        input {
+
+            width: 100%;
+
+            height: 50px;
+
+            padding: 0 45px 0 42px;
+
+            color: white;
+
+            background: #090909;
+
+            border: 1px solid var(--border);
+
+            outline: none;
+
+            font-size: .72rem;
+
+            transition: .25s;
+
+        }
+
+
+        input:focus {
+
+            border-color: var(--gold);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(201,168,106,.06);
+
+        }
+
+
+        .toggle-password {
+
+            position: absolute;
+
+            top: 50%;
+            right: 15px;
+
+            transform: translateY(-50%);
+
+            padding: 5px;
+
+            color: #555;
+
+            background: none;
+
+            border: none;
+
+            cursor: pointer;
+
+        }
+
+
+        .toggle-password:hover {
+
+            color: var(--gold);
+
+        }
+
+
+        .login-btn {
+
+            width: 100%;
+
+            height: 52px;
+
+            margin-top: 10px;
+
+            color: #111;
+
+            background: var(--gold);
+
+            border: none;
+
+            font-size: .67rem;
+
+            font-weight: 800;
+
+            letter-spacing: .1em;
+
+            text-transform: uppercase;
+
+            transition: .25s;
+
+        }
+
+
+        .login-btn:hover {
+
+            background: var(--gold-light);
+
+            transform: translateY(-1px);
+
+        }
+
+
+        .login-btn:disabled {
+
+            opacity: .6;
+
+            cursor: not-allowed;
+
+            transform: none;
+
+        }
+
+
+        .error {
+
+            display: none;
+
+            margin-bottom: 18px;
+
+            padding: 12px;
+
+            color: #e88484;
+
+            background: rgba(217,92,92,.08);
+
+            border: 1px solid
+                rgba(217,92,92,.2);
+
+            text-align: center;
+
+            font-size: .62rem;
+
+        }
+
+
+        .back {
+
+            display: block;
+
+            margin-top: 25px;
+
+            color: #666;
+
+            text-align: center;
+
+            text-decoration: none;
+
+            font-size: .62rem;
+
+            transition: .2s;
+
+        }
+
+
+        .back:hover {
+
+            color: var(--gold);
+
+        }
+
+
+        .security {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 7px;
+
+            margin-top: 22px;
+
+            color: #444;
+
+            font-size: .55rem;
+
+        }
+
+
+        .security i {
+
+            color: var(--gold);
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            body {
+
+                padding: 18px;
+
+            }
+
+
+            .login-card {
+
+                padding: 35px 22px;
+
+            }
+
+
+            .logo {
+
+                font-size: 2rem;
+
+                margin-bottom: 25px;
+
+            }
+
+
+            h1 {
+
+                font-size: 1.7rem;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="login-wrapper">
+
+
+        <div class="logo">
+
+            EST<span>O</span>RA
+
+        </div>
+
+
+        <div class="login-card">
+
+
+            <div class="icon">
+
+                <i class="fa-solid fa-lock"></i>
+
+            </div>
+
+
+            <h1>
+                Welcome Back
+            </h1>
+
+
+            <p class="subtitle">
+
+                Sign in to manage your properties
+
+            </p>
+
+
+            <div
+                class="error"
+                id="error"
+            >
+                Invalid email or password.
+            </div>
+
+
+            <form id="loginForm">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Admin Email
+                    </label>
+
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="admin@example.com"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Password
+                    </label>
+
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-key"></i>
+
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+
+                        <button
+                            type="button"
+                            class="toggle-password"
+                            id="togglePassword"
+                            aria-label="Show password"
+                        >
+
+                            <i
+                                class="fa-solid fa-eye"
+                            ></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="login-btn"
+                    id="loginBtn"
+                >
+
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i>
+
+                    &nbsp;
+
+                    Sign In
+
+                </button>
+
+
+            </form>
+
+
+            <a
+                href="index.html"
+                class="back"
+            >
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                &nbsp;
+
+                Back to ESTORA
+
+            </a>
+
+
+            <div class="security">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                Admin access only
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        const ADMIN_EMAIL =
+            "admin@estora.com";
+
+
+        const ADMIN_PASSWORD =
+            "123456789";
+
+
+        const loginForm =
+            document.getElementById(
+                "loginForm"
+            );
+
+
+        const emailInput =
+            document.getElementById(
+                "email"
+            );
+
+
+        const passwordInput =
+            document.getElementById(
+                "password"
+            );
+
+
+        const loginBtn =
+            document.getElementById(
+                "loginBtn"
+            );
+
+
+        const error =
+            document.getElementById(
+                "error"
+            );
+
+
+        const togglePassword =
+            document.getElementById(
+                "togglePassword"
+            );
+
+
+        /*
+        ========================================
+        SHOW / HIDE PASSWORD
+        ========================================
+        */
+
+        togglePassword.addEventListener(
+            "click",
+            () => {
+
+                const isPassword =
+                    passwordInput.type ===
+                    "password";
+
+
+                passwordInput.type =
+                    isPassword
+                        ? "text"
+                        : "password";
+
+
+                togglePassword.innerHTML =
+                    isPassword
+
+                        ? `<i class="fa-solid fa-eye-slash"></i>`
+
+                        : `<i class="fa-solid fa-eye"></i>`;
+
+            }
+        );
+
+
+        /*
+        ========================================
+        LOGIN
+        ========================================
+        */
+
+        loginForm.addEventListener(
+            "submit",
+            event => {
+
+                event.preventDefault();
+
+
+                error.style.display =
+                    "none";
+
+
+                const email =
+                    emailInput.value
+                        .trim()
+                        .toLowerCase();
+
+
+                const password =
+                    passwordInput.value;
+
+
+                if (
+                    email ===
+                        ADMIN_EMAIL.toLowerCase()
+                    &&
+                    password ===
+                        ADMIN_PASSWORD
+                ) {
+
+                    sessionStorage.setItem(
+                        "estoraAdminLoggedIn",
+                        "true"
+                    );
+
+
+                    loginBtn.disabled =
+                        true;
+
+
+                    loginBtn.innerHTML = `
+
+                        <i class="fa-solid fa-spinner fa-spin"></i>
+
+                        &nbsp;
+
+                        Loading...
+
+                    `;
+
+
+                    setTimeout(
+                        () => {
+
+                            window.location.href =
+                                "admin.html";
+
+                        },
+                        500
+                    );
+
+
+                } else {
+
+
+                    error.style.display =
+                        "block";
+
+
+                    passwordInput.value =
+                        "";
+
+
+                    passwordInput.focus();
+
+                }
+
+            }
+        );
+
+
+    </script>
+
+</body>
+
+</html>
