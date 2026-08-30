@@ -1134,111 +1134,14 @@
 
 
         /*
-         * Statistics
+         * Subscribers list (from Supabase, via /api/subscribers-list)
+         * Property stats (totalProperties, availableProperties,
+         * soldProperties, totalSubscribers) are already handled
+         * by updateStatistics() in admin.js — no need to duplicate
+         * that logic here.
          */
 
-        function updateDashboardStats() {
-
-            let properties = [];
-
-            try {
-
-                properties =
-                    JSON.parse(
-                        localStorage.getItem(
-                            "estoraAdminProperties"
-                        ) || "[]"
-                    );
-
-            } catch {
-
-                properties = [];
-
-            }
-
-
-            const total =
-                properties.length;
-
-
-            const sold =
-                properties.filter(
-                    property =>
-                        property.status ===
-                        "sold"
-                ).length;
-
-
-            const available =
-                total - sold;
-
-
-            let subscribers = [];
-
-            try {
-
-                subscribers =
-                    JSON.parse(
-                        localStorage.getItem(
-                            "estoraSubscribers"
-                        ) || "[]"
-                    );
-
-            } catch {
-
-                subscribers = [];
-
-            }
-
-
-            const totalProperties =
-                document.getElementById(
-                    "totalProperties"
-                );
-
-            const availableProperties =
-                document.getElementById(
-                    "availableProperties"
-                );
-
-            const soldProperties =
-                document.getElementById(
-                    "soldProperties"
-                );
-
-            const totalSubscribers =
-                document.getElementById(
-                    "totalSubscribers"
-                );
-
-
-            if (totalProperties)
-                totalProperties.textContent =
-                    total;
-
-
-            if (availableProperties)
-                availableProperties.textContent =
-                    available;
-
-
-            if (soldProperties)
-                soldProperties.textContent =
-                    sold;
-
-
-            if (totalSubscribers)
-                totalSubscribers.textContent =
-                    subscribers.length;
-
-        }
-
-
-        /*
-         * Subscribers
-         */
-
-        function renderSubscribers() {
+        async function renderSubscribers() {
 
             const list =
                 document.getElementById(
@@ -1253,12 +1156,20 @@
 
             try {
 
-                subscribers =
-                    JSON.parse(
-                        localStorage.getItem(
-                            "estoraSubscribers"
-                        ) || "[]"
+                const response =
+                    await fetch(
+                        "/api/subscribers-list"
                     );
+
+                const data =
+                    await response.json();
+
+                subscribers =
+                    Array.isArray(
+                        data.subscribers
+                    )
+                        ? data.subscribers
+                        : [];
 
             } catch {
 
@@ -1291,7 +1202,7 @@
             list.innerHTML =
                 subscribers
                     .map(
-                        (email, index) => `
+                        (subscriber, index) => `
 
                             <div class="subscriber-row">
 
@@ -1303,9 +1214,9 @@
 
                                 <div class="subscriber-email">
 
-                                    <i class="fa-regular fa-envelope"></i>
+                                    <i class="fa-brands fa-whatsapp"></i>
 
-                                    ${email}
+                                    ${subscriber.phone}
 
                                 </div>
 
@@ -1328,24 +1239,16 @@
          * Update after page loads
          */
 
-        updateDashboardStats();
-
         renderSubscribers();
 
 
         /*
-         * Keep stats updated
+         * Keep subscriber list reasonably fresh
          */
 
         setInterval(
-            () => {
-
-                updateDashboardStats();
-
-                renderSubscribers();
-
-            },
-            1000
+            renderSubscribers,
+            10000
         );
 
 
