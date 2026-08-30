@@ -1434,6 +1434,55 @@ a {
 }
 
 
+.subscriber-delete {
+
+    width: 30px;
+
+    height: 30px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #b23b3b;
+
+    background: rgba(178,59,59,.08);
+
+    border: 1px solid rgba(178,59,59,.18);
+
+    border-radius: 4px;
+
+    cursor: pointer;
+
+    font-size: 11px;
+
+    transition: .2s ease;
+
+}
+
+
+.subscriber-delete:hover {
+
+    color: #fff;
+
+    background: #b23b3b;
+
+}
+
+
+.subscriber-delete:disabled {
+
+    opacity: .5;
+
+    cursor: not-allowed;
+
+}
+
+
 .subscriber-status {
 
     padding: 6px 9px;
